@@ -4,6 +4,7 @@ const express = require('express');
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require('bcryptjs');
 
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -15,7 +16,6 @@ const usersRouter = require('./routes/users');
 const app = express();
 
 //mongoose setup
-//Set up mongoose connection
 const mongoose = require('mongoose');
 const dev_db_url = 'mongodb://127.0.0.1:27017/members_only';
 const mongoDB = process.env.MONGODB_URI || dev_db_url;
@@ -50,9 +50,18 @@ passport.use(
       if (!user) {
         return done(null, false, { msg: "Incorrect username" });
       }
-      if (user.password !== password) {
-        return done(null, false, { msg: "Incorrect password" });
-      }
+
+      bcrypt.compare(password, user.password, (err, res) => {
+        if (res) {
+          // passwords match! log user in
+          return done(null, user)
+        } else {
+          // passwords do not match!
+          return done(null, false, {msg: "Incorrect password"})
+        }
+      })
+
+
       return done(null, user);
     });
   })

@@ -9,7 +9,6 @@ const UserSchema = new Schema(
     password: {type: String, required: true, maxlength: 100},
     //membership-status:
     //membership_status: {type: String, required: true, enum: ['Available', 'Maintenance', 'Loaned', 'Reserved'], default: 'Maintenance'},
-
   }
 );
 
