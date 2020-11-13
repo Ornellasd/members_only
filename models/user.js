@@ -7,7 +7,6 @@ const UserSchema = new Schema(
     first_name: {type: String, required: true, maxlength: 100},
     last_name: {type: String, required: true, maxlength: 100},
     password: {type: String, required: true, maxlength: 100},
-    //membership-status:
     //membership_status: {type: String, required: true, enum: ['Available', 'Maintenance', 'Loaned', 'Reserved'], default: 'Maintenance'},
   }
 );

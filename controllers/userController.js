@@ -1,15 +1,20 @@
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
+const Message = require('../models/message');
+
 
 exports.index = (req, res, next) => {
-  
-  res.render('index', 
-    { 
-      title: 'Members Only',
-      user: req.user,
-    }
-  );
+
+  Message.find({}, 'title timestamp text user')
+    .populate('user')
+    .exec((err, list_messages) => {
+      res.render('index', {
+        title: 'Member Only',
+        user: req.user,
+        messages: list_messages,
+      });
+    });
 }
 
 exports.sign_up_get = (req, res, next) => {
