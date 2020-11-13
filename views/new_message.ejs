@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <h1><%= title %></h1>
+  <form action="" method="POST">
+  	<label for="message_title">Title</label>
+    <input name="message_title" placeholder="" type="text" />
+    <label for="message_text">Text</label>
+    <textarea name="message_text"></textarea>
+    <button>Submit</button>
+  </form>
+</body>
+</html>
+
+
+<!-- 
+
+const MessageSchema = new Schema(
+  {
+    title: {type: String, required: true, maxlength: 100},
+    timestamp: {type: Date, default: Date.now},
+    text: {type: String, required: true},
+    user: {type: Schema.Types.ObjectId, ref: 'User', required: true},
+  }
+);
+-->

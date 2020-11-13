@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 
 exports.index = (req, res, next) => {
+  
   res.render('index', 
     { 
       title: 'Members Only',

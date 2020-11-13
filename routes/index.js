@@ -4,7 +4,7 @@ const passport = require("passport");
 
 
 const user_controller = require('../controllers/userController');
-
+const message_controller = require('../controllers/messageController');
 
 router.get('/', user_controller.index);
 
@@ -24,5 +24,9 @@ router.get('/log-out', (req, res) => {
   req.logout();
   res.redirect('/');
 });
+
+router.get('/new_message', message_controller.new_message_get);
+
+router.post('/new_message', message_controller.new_message_post);
 
 module.exports = router;
