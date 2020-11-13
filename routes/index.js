@@ -13,11 +13,16 @@ router.get('/sign-up', user_controller.sign_up_get);
 router.post('/sign-up', user_controller.sign_up_post);
 
 router.post(
-  "/log-in",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/"
+  '/log-in',
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/'
   })
 );
+
+router.get('/log-out', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
 
 module.exports = router;
