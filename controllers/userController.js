@@ -8,7 +8,6 @@ exports.index = (req, res, next) => {
   Message.find({}, 'title timestamp text user')
     .populate('user')
     .exec((err, list_messages) => {
-      console.log(list_messages);
       res.render('index', {
         title: 'Member Only',
         user: req.user,
