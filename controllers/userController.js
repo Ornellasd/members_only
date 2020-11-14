@@ -16,6 +16,18 @@ exports.index = (req, res, next) => {
     });
 }
 
+exports.log_in_post = ( 
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/'
+  })
+)
+
+exports.log_out_get = (req, res) => {
+  req.logout();
+  res.redirect('/');
+}
+
 exports.sign_up_get = (req, res, next) => {
   res.render('sign-up', { title: 'Sign Up', errors: ''});
 }
@@ -35,7 +47,6 @@ exports.sign_up_post = [
   }).escape(),
 
   (req, res, next) => {
-
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
