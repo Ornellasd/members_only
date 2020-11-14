@@ -17,5 +17,12 @@
     <input name="password" type="password" />
     <button>Sign Up</button>
   </form>
+  <% if(errors) { %>
+    <% errors.forEach((error) => { %>
+      <%= error.msg %>
+      <br />
+    <% }) %>
+  <% } %>
 </body>
 </html>
+
