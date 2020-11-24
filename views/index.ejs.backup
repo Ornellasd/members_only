@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <% if (user) { %>
+      <h1>Hello <%= user.first_name %></h1>
+      <a href="/new_message">Create new message</a>
+      <a href="/log-out">Log Out</a>
+      <% messages.forEach((message) => { %>
+        Title: <%= message.title %>
+        Text: <%= message.text %>
+        User: <%= message.user.first_name %>
+        Time: <%= message.timestamp %>
+        <hr />
+      <% }) %>
+    <% } else { %>
+    <h1>Please Log In</h1>
+    <form action="/log-in" method="POST">
+			<label for="username">Email</label>
+			<input name="username" placeholder="" type="text" />
+			<label for="password">Password</label>
+			<input name="password" type="password" />
+			<button>Log In</button>
+		</form>
+    <a href="/sign-up">Sign Up</a>
+    <% } %>
+  </body>
+</html>

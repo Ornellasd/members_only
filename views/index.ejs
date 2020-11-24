@@ -1,33 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Blog Template for Bootstrap</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/blog/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/blog.css">
   </head>
+
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <% if (user) { %>
-      <h1>Hello <%= user.first_name %></h1>
-      <a href="/new_message">Create new message</a>
-      <a href="/log-out">Log Out</a>
-      <% messages.forEach((message) => { %>
-        Title: <%= message.title %>
-        Text: <%= message.text %>
-        User: <%= message.user.first_name %>
-        Time: <%= message.timestamp %>
-        <hr />
-      <% }) %>
-    <% } else { %>
-    <h1>Please Log In</h1>
-    <form action="/log-in" method="POST">
-			<label for="username">Email</label>
-			<input name="username" placeholder="" type="text" />
-			<label for="password">Password</label>
-			<input name="password" type="password" />
-			<button>Log In</button>
-		</form>
-    <a href="/sign-up">Sign Up</a>
-    <% } %>
+
+    <div class="blog-header">
+      <div class="container">
+        <h1 class="blog-title"><%= title %></h1>
+        <p class="lead blog-description">An example blog template built with Bootstrap.</p>
+        <a href="/sign-up" class="btn btn-primary">Sign Up</a>
+        <a href="/new_message" class="btn btn-success">Create new message</a>
+
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-sm-12 blog-main">
+
+          <% if (user) { %>
+            <% messages.forEach((message) => { %>
+              <div class="blog-post">
+                <h2 class="blog-post-title"><%= message.title %>></h2>
+                <p class="blog-post-meta"><%= message.timestamp %> by <a href="#"><%= message.user.first_name %></a></p>
+                <p><%= message.text %></p>
+              </div><!-- /.blog-post -->
+            <% }) %>
+          <% } else { %>
+            <form action="/log-in" method="POST">
+              <label for="username">Email</label>
+              <input name="username" placeholder="" type="text" />
+              <label for="password">Password</label>
+              <input name="password" type="password" />
+              <button>Log In</button>
+            </form>
+          <% } %>
+
+        
+
+      
+          <!--
+          <nav class="blog-pagination">
+            <a class="btn btn-outline-primary" href="#">Older</a>
+            <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
+          </nav>
+          -->
+
+        </div><!-- /.blog-main -->
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <footer class="blog-footer">
+      <p>Blog template built for <a href="https://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://v4-alpha.getbootstrap.com/dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="https://v4-alpha.getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>

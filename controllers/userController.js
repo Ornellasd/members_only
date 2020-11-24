@@ -9,7 +9,7 @@ exports.index = (req, res, next) => {
     .populate('user')
     .exec((err, list_messages) => {
       res.render('index', {
-        title: 'Member Only',
+        title: 'Members Only',
         user: req.user,
         messages: list_messages,
       });
@@ -19,7 +19,7 @@ exports.index = (req, res, next) => {
 exports.log_in_post = ( 
   passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/'
+    failureRedirect: '/',
   })
 )
 
@@ -50,11 +50,11 @@ exports.sign_up_post = [
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        res.render('sign-up', {
-          title: 'Sign Up',
-          errors: errors.array()
-        });
-      return;
+      res.render('sign-up', {
+        title: 'Sign Up',
+        errors: errors.array()
+      });
+     
     } else {
       bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
         if(err){

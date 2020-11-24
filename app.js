@@ -52,6 +52,7 @@ passport.use(
       }
 
       bcrypt.compare(password, user.password, (err, res) => {
+        if(err) return next(err);
         if (res) {
           // passwords match! log user in
           return done(null, user)
@@ -60,7 +61,6 @@ passport.use(
           return done(null, false, {msg: "Incorrect password"})
         }
       })
-
 
       return done(null, user);
     });
