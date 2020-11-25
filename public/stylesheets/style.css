@@ -64,6 +64,10 @@ nav .navbar-nav li a {
   margin-bottom: .25rem;
   font-size: 2.5rem;
 }
+.blog-post-meta {
+  margin-bottom: 1.25rem;
+  color: rgb(153, 153, 153);
+}
 
 /*
  * Footer

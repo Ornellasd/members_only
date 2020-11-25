@@ -10,7 +10,12 @@
             <% messages.forEach((message) => { %>
               <div class="blog-post">
                 <h2 class="blog-post-title"><%= message.title %></h2>
-                <p class="blog-post-meta"><%= message.timestamp %> by <a href="#"><%= message.user.first_name %></a></p>
+                <p class="blog-post-meta">
+                  <%= message.timestamp %> by 
+                  <a href="#">
+                    <%= user.membership_status == 'Admin' ? message.user.first_name : 'Anonymous' %>
+                  </a>
+                </p>
                 <p><%= message.text %></p>
               </div>
             <% }) %>
