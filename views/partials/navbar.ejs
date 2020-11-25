@@ -17,8 +17,19 @@
             Hello, <%= user.first_name %>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="/log-out">Logout</a>
-            <a class="dropdown-item" href="#">Priveleges</a>
+            <form class="form-horizontal px-2 py-2" method="post" accept-charset="UTF-8">
+              <input class="form-control login" type="password" name="secret_word" placeholder="Elevate Privileges"><br>
+              <input class="btn btn-sm btn-primary" type="submit" name="submit" value="Submit">
+            </form>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/log-out">
+              Logout
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                <path d="M7 12h14l-3 -3m0 6l3 -3" />
+              </svg>
+            </a>
           </div>
         </li>
       <% } else { %>
