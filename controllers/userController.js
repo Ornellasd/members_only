@@ -11,7 +11,7 @@ exports.index = (req, res, next) => {
       res.render('index', {
         title: 'Members Only',
         user: req.user,
-        messages: list_messages,
+        messages: list_messages.reverse(),
       });
     });
 }
