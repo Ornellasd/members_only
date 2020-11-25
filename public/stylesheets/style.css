@@ -1,0 +1,8 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+nav .navbar-nav li a {
+  color: white;
+  text-decoration: none;
+}

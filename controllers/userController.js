@@ -29,7 +29,11 @@ exports.log_out_get = (req, res) => {
 }
 
 exports.sign_up_get = (req, res, next) => {
-  res.render('sign-up', { title: 'Sign Up', errors: ''});
+  res.render('sign-up', {
+    title: 'Sign Up',
+    user: req.user,
+    errors: '',
+  });
 }
 
 exports.sign_up_post = [
@@ -51,7 +55,7 @@ exports.sign_up_post = [
 
     if (!errors.isEmpty()) {
       res.render('sign-up', {
-        title: 'Sign Up',
+        title: 'Members Only',
         errors: errors.array()
       });
      
