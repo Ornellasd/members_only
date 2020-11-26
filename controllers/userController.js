@@ -30,20 +30,26 @@ exports.log_out_get = (req, res) => {
 }
 
 exports.elevate_privileges = (req, res) => {
-  let privilege;
+  function setPrivilege(privilege) {
+    User.findByIdAndUpdate(req.user._id, { membership_status: privilege }, (err, result) => {
+      if(err) {
+        return err;
+      }
+    });  
+  }
+
   switch(req.body.secret_word) {
     case 'admin_me':
-      privilege = 'Admin';
-      break
+      setPrivilege('Admin');
+      break;
     case 'member_me':
-      privilege = 'Member';
-      break
+      setPrivilege('Member');
+      break;
+
+    default:
+      console.log('WRONG PASSWORD!');
+      res.redirect('/');
   }
-  User.findByIdAndUpdate(req.user._id, { membership_status: privilege }, (err, result) => {
-    if(err) {
-      return err;
-    }
-  });
   res.redirect('/');
 }
 

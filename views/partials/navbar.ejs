@@ -17,6 +17,7 @@
             Hello, <%= user.first_name %>
           </a>
           <div class="dropdown-menu" style="width: 300px;" aria-labelledby="navbarDropdownMenuLink">
+            <p class="dropdown-item">Membership Status: <%= user.membership_status %></p>
             <form class="form-horizontal px-2 py-2" method="POST" action="/elevate_privileges">
               <input class="form-control login" type="password" name="secret_word" placeholder="Elevate Privileges"><br>
               <input class="btn btn-sm btn-primary" type="submit" name="submit" value="Submit">
