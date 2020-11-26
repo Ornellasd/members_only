@@ -1,8 +1,9 @@
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
+const { body,validationResult } = require('express-validator');
+
 const User = require('../models/user');
 const Message = require('../models/message');
-const { body,validationResult } = require('express-validator');
 
 exports.index = (req, res, next) => {
   Message.find({}, 'title timestamp text user')
@@ -29,13 +30,20 @@ exports.log_out_get = (req, res) => {
 }
 
 exports.elevate_privileges = (req, res) => {
-  if(req.body.secret_word == 'admin_me') {
-    User.findByIdAndUpdate(req.user._id, { membership_status: 'Admin' }, (err, result) => {
-      if(err) {
-        return err;
-      }
-    });
+  let privilege;
+  switch(req.body.secret_word) {
+    case 'admin_me':
+      privilege = 'Admin';
+      break
+    case 'member_me':
+      privilege = 'Member';
+      break
   }
+  User.findByIdAndUpdate(req.user._id, { membership_status: privilege }, (err, result) => {
+    if(err) {
+      return err;
+    }
+  });
   res.redirect('/');
 }
 
