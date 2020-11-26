@@ -28,6 +28,17 @@ exports.log_out_get = (req, res) => {
   res.redirect('/');
 }
 
+exports.elevate_privileges = (req, res) => {
+  if(req.body.secret_word == 'admin_me') {
+    User.findByIdAndUpdate(req.user._id, { membership_status: 'Admin' }, (err, result) => {
+      if(err) {
+        return err;
+      }
+    });
+  }
+  res.redirect('/');
+}
+
 exports.sign_up_get = (req, res, next) => {
   res.render('sign-up', {
     title: 'Sign Up',
