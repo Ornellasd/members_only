@@ -74,6 +74,9 @@ nav .navbar-nav li a {
  */
 
 .blog-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   padding: 2.5rem 0;
   color: #999;
   text-align: center;
