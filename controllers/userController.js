@@ -78,7 +78,7 @@ exports.sign_up_post = [
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      res.render('sign-up', {
+      res.render('index', {
         title: 'Members Only',
         errors: errors.array()
       });
