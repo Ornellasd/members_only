@@ -39,10 +39,10 @@ exports.elevate_privileges = (req, res) => {
   }
 
   switch(req.body.secret_word) {
-    case 'admin_me':
+    case process.env.ADMIN:
       setPrivilege('Admin');
       break;
-    case 'member_me':
+    case process.env.MEMBER:
       setPrivilege('Member');
       break;
     default:
