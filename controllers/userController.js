@@ -45,6 +45,9 @@ exports.elevate_privileges = (req, res) => {
     case process.env.MEMBER:
       setPrivilege('Member');
       break;
+    case process.env.NONMEMBER:
+      setPrivilege('Non-Member');
+      break;
     default:
       console.log('WRONG PASSWORD!');
       res.redirect('/');
