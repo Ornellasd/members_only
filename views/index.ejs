@@ -20,7 +20,7 @@
                 <h2 class="blog-post-title"><%= message.title %></h2>
                 <% if(typeof(user) == 'object' && user) { %>
                   <p class="blog-post-meta">
-                    <%= message.timestamp %> by
+                    <%= user.membership_status == 'Admin' || user.membership_status == 'Member' ? message.timestamp + ' by' : '' %>
                     <a href="#">
                       <%= user.membership_status == 'Admin' ? message.user.first_name : 'Anonymous' %>
                     </a>
