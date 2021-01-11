@@ -8,6 +8,9 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
       <ul class="navbar-nav">
+      <% if(typeof(user) == 'object' && user.membership_status == 'Non-Member') { %>
+        <a class="nav-link" data-toggle="modal" data-target="#signUpModal" href="">Log In</a>
+      <% } %>
       <% if(typeof(user) == 'object' && user) { %>
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#newMessageModal" href="">New Message</a>
@@ -34,6 +37,9 @@
           </div>
         </li>
       <% } else { %>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#logInModal" href="">Log In</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#signUpModal" href="">Sign Up</a>
         </li>
