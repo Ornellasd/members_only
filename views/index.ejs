@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('partials/head.ejs') %>
+  <%- include('partials/head.ejs') %>
+
   <body>
     <%- include('partials/navbar.ejs') %>
     <div class="container py-4">
       <div class="row">
         <div class="col-sm-12">
           <% if(typeof(user) == 'object' && user) { %>
-            <% messages.forEach((message) => { %>
-              <div class="blog-post">
-                <h2 class="blog-post-title"><%= message.title %></h2>
-                <p class="blog-post-meta">
-                  <%= message.timestamp %> by 
-                  <a href="#">
-                    <%= user.membership_status == 'Admin' ? message.user.first_name : 'Anonymous' %>
-                  </a>
-                </p>
-                <p><%= message.text %></p>
-              </div>
-            <% }) %>
+            <% if(messages.length !== 0) { %>
+              <% messages.forEach((message) => { %>
+                <div class="blog-post">
+                  <h2 class="blog-post-title"><%= message.title %></h2>
+                  <p class="blog-post-meta">
+                    <%= message.timestamp %> by
+                    <a href="#">
+                      <%= user.membership_status == 'Admin' ? message.user.first_name : 'Anonymous' %>
+                    </a>
+                  </p>
+                  <p><%= message.text %></p>
+                </div>
+              <% }) %>
+            <% } else { %>
+              <h5>No messages :(</h5>
+            <% } %>
           <% } else { %>
             <% if(typeof(errors) == 'object' && errors) { %>
               <% errors.forEach((error) => { %>
@@ -28,7 +33,7 @@
               <% }) %>
             <% } %>
             <h3 class="text-center">Log In</h3>
-            <form method="POST" action="/log-in">  
+            <form method="POST" action="/log-in">
               <div class="form-group">
                 <label for="username">Email:</label>
                 <input class="form-control" type="text" id="username" name="username">
@@ -47,10 +52,11 @@
     <footer class="blog-footer">
       <p>Members Only is &copy; David Ornellas, created as part of The Odin Project curriculum</p>
       <p><a href="http://github.com/ornellasd">Check out my GitHub</a> <i class="fa fa-github"></i></p>
-        <a href="#">Back to top</a>
+      <a href="#">Back to top</a>
       </p>
     </footer>
     <%- include('sign-up-modal.ejs') %>
     <%- include('new-message-modal.ejs') %>
   </body>
+
 </html>
