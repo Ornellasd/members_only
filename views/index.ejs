@@ -21,12 +21,13 @@
                 <% if(typeof(user) == 'object' && user) { %>
                   <p class="blog-post-meta">
                     <%= user.membership_status == 'Admin' || user.membership_status == 'Member' ? message.timestamp + ' by' : '' %>
-                    <a href="#">
-                      <%= user.membership_status == 'Admin' ? message.user.first_name : 'Anonymous' %>
-                    </a>
+                    <%= user.membership_status == 'Admin' ? message.user.first_name : 'Anonymous' %>
                   </p>
                 <% } %>
                 <p><%= message.text %></p>
+                <% if (typeof(user) == 'object' && user.membership_status == 'Admin') { %>
+                  <a class="text-danger" data-toggle="modal" data-target="#deleteMessageModal" href="" onclick="deleteMessage('<%= message._id %>')">Delete</a>
+                <% } %>
               </div>
             <% }) %>
           <% } else { %>
@@ -45,6 +46,7 @@
     <%- include('sign-up-modal.ejs') %>
     <%- include('log-in-modal.ejs') %>
     <%- include('new-message-modal.ejs') %>
+    <%- include('delete-message-modal.ejs') %>
+    <script src="/javascripts/script.js"></script>
   </body>
-
 </html>

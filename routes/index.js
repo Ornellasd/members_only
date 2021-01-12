@@ -13,8 +13,10 @@ router.post('/log-in', user_controller.log_in_post);
 
 router.get('/log-out', user_controller.log_out_get);
 
-router.post('/elevate_privileges', user_controller.elevate_privileges);
+router.post('/elevate-privileges', user_controller.elevate_privileges);
 
 router.post('/new-message', message_controller.new_message_post);
+
+router.post('/delete-message/:id', message_controller.delete_message_post);
 
 module.exports = router;

@@ -10,5 +10,12 @@ const MessageSchema = new Schema(
   }
 );
 
+//Virtual for message URL to delete
+MessageSchema
+.virtual('url')
+.get(function() {
+  return '/message/' + this._id;
+});
+
 //Export model
 module.exports = mongoose.model('Message', MessageSchema);

@@ -8,9 +8,6 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
       <ul class="navbar-nav">
-      <% if(typeof(user) == 'object' && user.membership_status == 'Non-Member') { %>
-        <a class="nav-link" data-toggle="modal" data-target="#signUpModal" href="">Log In</a>
-      <% } %>
       <% if(typeof(user) == 'object' && user) { %>
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#newMessageModal" href="">New Message</a>
@@ -21,7 +18,7 @@
           </a>
           <div class="dropdown-menu" style="width: 300px;" aria-labelledby="navbarDropdownMenuLink">
             <p class="dropdown-item">Membership Status: <strong><%= user.membership_status %></strong></p>
-            <form class="form-horizontal px-2 py-2" method="POST" action="/elevate_privileges">
+            <form class="form-horizontal px-2 py-2" method="POST" action="/elevate-privileges">
               <input class="form-control login" type="password" name="secret_word" placeholder="Elevate Privileges"><br>
               <input class="btn btn-sm btn-primary" type="submit" name="submit" value="Submit">
             </form>
