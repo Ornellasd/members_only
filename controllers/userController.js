@@ -55,8 +55,10 @@ exports.elevate_privileges = (req, res) => {
       break;
     default:
       // throw error on page when that is figured out
-      console.log('WRONG PASSWORD!');
-      res.redirect('/');
+      res.render('index', {
+        title: 'Members Only',
+        errors: [{ 'msg': 'ACCESS DENIED'}]
+      });
   }
   res.redirect('/');
 }
@@ -91,7 +93,7 @@ exports.sign_up_post = [
     min: 1
   }).escape(),
 
-  (req, res, next) => {
+  async(req, res, next) => {
     let errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -99,18 +101,12 @@ exports.sign_up_post = [
         title: 'Members Only',
         errors: errors.array()
       });
-
     } else {
-      bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-        if (err) {
-          return next(err);
-        };
-
         const user = new User({
           username: req.body.username,
           first_name: req.body.first_name,
           last_name: req.body.last_name,
-          password: hashedPassword,
+          password:  await bcrypt.hash(req.body.password, 10),
         });
 
         user.save((err) => {
@@ -119,7 +115,7 @@ exports.sign_up_post = [
           };
           res.redirect('/')
         });
-      });
+      
     }
   }
 ];
