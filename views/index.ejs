@@ -7,13 +7,18 @@
     <div class="container py-4">
       <div class="row">
         <div class="col-sm-12">
-          <% if(typeof(errors) == 'object' && errors) { %>
-            <% errors.forEach((error) => { %>
-              <div class="alert alert-danger" role="alert">
-                <%= error.msg %>
-              </div>
+          <% if(typeof(alerts) == 'object' && alerts) { %>
+            <% alerts.forEach((alert) => { %>
+              <% if(alert.type == 'success') { %>  
+                <div class="alert alert-success" role="alert">
+              <% } else {  %>
+                <div class="alert alert-danger" role="alert">
+              <% } %>
+                  <%= alert.msg %>
+                </div>
             <% }) %>
           <% } %>
+
           <% if(typeof(messages) == 'object' && messages.length !== 0) { %>
             <% messages.forEach((message) => { %>
               <div class="blog-post">

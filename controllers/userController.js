@@ -56,7 +56,7 @@ exports.elevate_privileges = (req, res) => {
     default:
       res.render('index', {
         title: 'Members Only',
-        errors: [{ 'msg': 'ACCESS DENIED'}]
+        alerts: [{ 'msg': 'ACCESS DENIED'}]
       });
   }
   res.redirect('/');
@@ -66,7 +66,7 @@ exports.sign_up_get = (req, res, next) => {
   res.render('sign-up', {
     title: 'Sign Up',
     user: req.user,
-    errors: '',
+    alerts: '',
   });
 }
 
@@ -98,7 +98,7 @@ exports.sign_up_post = [
     if (!errors.isEmpty()) {
       res.render('index', {
         title: 'Members Only',
-        errors: errors.array()
+        alerts: errors.array()
       });
     } else {
       const user = new User({
@@ -112,7 +112,10 @@ exports.sign_up_post = [
         if (err) {
           return next(err);
         } else {
-          res.redirect('/');
+          res.render('index', {
+            title: 'Members Only',
+            alerts: [{ 'msg': 'Sign Up Successful!', 'type': 'success' }]
+          });
         }
       });
     }
