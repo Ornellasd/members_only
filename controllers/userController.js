@@ -54,7 +54,6 @@ exports.elevate_privileges = (req, res) => {
       setPrivilege('Non-Member');
       break;
     default:
-      // throw error on page when that is figured out
       res.render('index', {
         title: 'Members Only',
         errors: [{ 'msg': 'ACCESS DENIED'}]
@@ -76,20 +75,20 @@ exports.sign_up_post = [
     min: 1
   }).custom(value => {
     return User.findOne({
-      username: value
+      username: { $regex: value, $options: 'i' }
     }).then(user => {
       if (user) {
         return Promise.reject('Email already in use');
       }
     })
   }).escape(),
-  body('first_name', 'first name required').trim().isLength({
+  body('first_name', 'First name required').trim().isLength({
     min: 1
   }).escape(),
-  body('last_name', 'last name required').trim().isLength({
+  body('last_name', 'Last name required').trim().isLength({
     min: 1
   }).escape(),
-  body('password', 'password required').trim().isLength({
+  body('password', 'Password required').trim().isLength({
     min: 1
   }).escape(),
 
@@ -102,20 +101,20 @@ exports.sign_up_post = [
         errors: errors.array()
       });
     } else {
-        const user = new User({
-          username: req.body.username,
-          first_name: req.body.first_name,
-          last_name: req.body.last_name,
-          password:  await bcrypt.hash(req.body.password, 10),
-        });
+      const user = new User({
+        username: req.body.username,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        password:  await bcrypt.hash(req.body.password, 10),
+      });
 
-        user.save((err) => {
-          if (err) {
-            return next(err);
-          };
-          res.redirect('/')
-        });
-      
+      user.save((err) => {
+        if (err) {
+          return next(err);
+        } else {
+          res.redirect('/');
+        }
+      });
     }
   }
 ];
