@@ -71,11 +71,9 @@ exports.sign_up_get = (req, res, next) => {
 }
 
 exports.sign_up_post = [
-  body('username', 'username required').trim().isLength({
-    min: 1
-  }).custom(value => {
+  body('username', 'Username required').trim().notEmpty().custom(value => {
     return User.findOne({
-      username: { $regex: value, $options: 'i' }
+      username: value.toLowerCase()
     }).then(user => {
       if (user) {
         return Promise.reject('Email already in use');
@@ -102,7 +100,7 @@ exports.sign_up_post = [
       });
     } else {
       const user = new User({
-        username: req.body.username,
+        username: req.body.username.toLowerCase(),
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         password:  await bcrypt.hash(req.body.password, 10),
