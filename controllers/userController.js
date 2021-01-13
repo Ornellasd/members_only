@@ -1,6 +1,9 @@
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
-const { body,validationResult } = require('express-validator');
+const {
+  body,
+  validationResult
+} = require('express-validator');
 
 const User = require('../models/user');
 const Message = require('../models/message');
@@ -17,7 +20,7 @@ exports.index = (req, res, next) => {
     });
 }
 
-exports.log_in_post = ( 
+exports.log_in_post = (
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/',
@@ -31,14 +34,16 @@ exports.log_out_get = (req, res) => {
 
 exports.elevate_privileges = (req, res) => {
   function setPrivilege(privilege) {
-    User.findByIdAndUpdate(req.user._id, { membership_status: privilege }, (err, result) => {
-      if(err) {
+    User.findByIdAndUpdate(req.user._id, {
+      membership_status: privilege
+    }, (err, result) => {
+      if (err) {
         return err;
       }
-    });  
+    });
   }
 
-  switch(req.body.secret_word) {
+  switch (req.body.secret_word) {
     case process.env.ADMIN:
       setPrivilege('Admin');
       break;
@@ -49,6 +54,7 @@ exports.elevate_privileges = (req, res) => {
       setPrivilege('Non-Member');
       break;
     default:
+      // throw error on page when that is figured out
       console.log('WRONG PASSWORD!');
       res.redirect('/');
   }
@@ -66,6 +72,14 @@ exports.sign_up_get = (req, res, next) => {
 exports.sign_up_post = [
   body('username', 'username required').trim().isLength({
     min: 1
+  }).custom(value => {
+    return User.findOne({
+      username: value
+    }).then(user => {
+      if (user) {
+        return Promise.reject('Email already in use');
+      }
+    })
   }).escape(),
   body('first_name', 'first name required').trim().isLength({
     min: 1
@@ -78,17 +92,17 @@ exports.sign_up_post = [
   }).escape(),
 
   (req, res, next) => {
-    const errors = validationResult(req);
+    let errors = validationResult(req);
 
     if (!errors.isEmpty()) {
       res.render('index', {
         title: 'Members Only',
         errors: errors.array()
       });
-     
+
     } else {
       bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-        if(err){
+        if (err) {
           return next(err);
         };
 
@@ -100,7 +114,7 @@ exports.sign_up_post = [
         });
 
         user.save((err) => {
-          if(err) {
+          if (err) {
             return next(err);
           };
           res.redirect('/')

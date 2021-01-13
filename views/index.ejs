@@ -14,7 +14,7 @@
               </div>
             <% }) %>
           <% } %>
-          <% if(messages.length !== 0) { %>
+          <% if(typeof(messages) == 'object' && messages.length !== 0) { %>
             <% messages.forEach((message) => { %>
               <div class="blog-post">
                 <h2 class="blog-post-title"><%= message.title %></h2>
