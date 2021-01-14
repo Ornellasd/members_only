@@ -1,88 +1,23 @@
-body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+html,body {
+  height:100%;
 }
 
-nav .navbar-nav li a {
-  text-decoration: none;
+#wrap {
+  min-height: 100%;
+  padding-bottom: 200px;
+  overflow: auto;
 }
 
-/*
- * Globals
- */
 
-@media (min-width: 48em) {
-  html {
-    font-size: 18px;
-  }
-}
-
-/*
- * Override Bootstrap's default container.
- */
-
-.container {
-  max-width: 60rem;
-}
-
-/* Nav links */
-.nav-link {
+footer {
   position: relative;
-  padding: 1rem;
-  font-weight: 500;
-  color: #cdddeb;
-}
-.nav-link:hover,
-.nav-link:focus {
-  color: #fff;
-  background-color: transparent;
-}
-
-/*
- * Blog name and description
- */
-
-.blog-title {
-  margin-bottom: 0;
-  font-size: 2rem;
-  font-weight: normal;
-}
-
-@media (min-width: 40em) {
-  .blog-title {
-    font-size: 3.5rem;
-  }
-}
-
-/*
- * Blog posts
- */
-
-.blog-post {
-  margin-bottom: 4rem;
-}
-.blog-post-title {
-  margin-bottom: .25rem;
-  font-size: 2.5rem;
-}
-.blog-post-meta {
-  margin-bottom: 1.25rem;
-  color: rgb(153, 153, 153);
-}
-
-/*
- * Footer
- */
-
-.blog-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 2.5rem 0;
+  margin-top: -150px; /* negative value of footer height */
+  height: 150px;
+  clear: both;
+  padding-top:20px;
   color: #999;
-  text-align: center;
   background-color: #f9f9f9;
   border-top: .05rem solid #e5e5e5;
-}
-.blog-footer p:last-child {
-  margin-bottom: 0;
+  text-align: center;
+
 }
