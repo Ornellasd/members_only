@@ -1,9 +1,6 @@
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
-const {
-  body,
-  validationResult
-} = require('express-validator');
+const { body, validationResult } = require('express-validator');
 
 const User = require('../models/user');
 const Message = require('../models/message');
@@ -70,6 +67,7 @@ exports.elevate_privileges = (req, res) => {
       res.render('index', {
         title: 'Members Only',
         user: req.user,
+        messages: 'none',
         alerts: [{
           'msg': 'ACCESS DENIED'
         }]
