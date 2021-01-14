@@ -26,6 +26,7 @@ exports.log_in_post = (req, res, next) => {
     if (!user) {
       res.render('index', {
         title: 'Members Only',
+        user: req.user,
         alerts: [{
           'msg': 'Wrong username and/or password'
         }]
@@ -127,6 +128,7 @@ exports.sign_up_post = [
         } else {
           res.render('index', {
             title: 'Members Only',
+            user: req.user,
             alerts: [{
               'msg': 'Sign Up Successful!',
               'type': 'success'

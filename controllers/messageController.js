@@ -43,7 +43,6 @@ exports.new_message_post = [
   }
 ];
 
-
 exports.delete_message_post = (req, res) => {
   Message.findByIdAndRemove(req.params.id, (err, message) => {
     if (err) {
@@ -51,6 +50,5 @@ exports.delete_message_post = (req, res) => {
     } else {
       res.redirect('/');  
     }
-    
   });
 }
