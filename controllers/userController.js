@@ -69,6 +69,7 @@ exports.elevate_privileges = (req, res) => {
     default:
       res.render('index', {
         title: 'Members Only',
+        user: req.user,
         alerts: [{
           'msg': 'ACCESS DENIED'
         }]
