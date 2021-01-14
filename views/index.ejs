@@ -5,7 +5,7 @@
   <body>
     <div id="wrap">
       <%- include('partials/navbar.ejs') %>
-      <div id ="main" class="container clear-top py-4">
+      <div class="container clear-top py-4">
         <div class="row">
           <div class="col-sm-12">
             <% if(typeof(alerts) == 'object' && alerts) { %>
@@ -36,7 +36,7 @@
                   <% } %>
                 </div>
               <% }) %>
-            <% } else if(messages !== 'none') { %>
+            <% } else if(typeof(messages) == 'object' && messages !== 'none') { %>
               <h5>No messages :(</h5>
             <% } %>
           </div>
