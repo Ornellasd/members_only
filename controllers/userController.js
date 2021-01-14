@@ -40,7 +40,6 @@ exports.log_in_post = (req, res, next) => {
   })(req, res, next)
 }
 
-
 exports.log_out_get = (req, res) => {
   req.logout();
   res.redirect('/');
