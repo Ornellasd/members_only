@@ -10,34 +10,41 @@ exports.new_message_get = (req, res, next) => {
 }
 
 exports.new_message_post = [
-  body('message_title', 'title required').trim().isLength({
-    min: 1
+  body('message_title', 'Title required').trim().isLength({
+    min: 1,
+    max: 60
   }).escape(),
-  body('message_text', 'message required').trim().isLength({
+  body('message_text', 'Message required').trim().isLength({
     min: 1
   }).escape(),
 
   (req, res, next) => {
     const errors = validationResult(req);
 
-    const message = new Message({
-      title: req.body.message_title,
-      text: req.body.message_text,
-      user: req.user._id,
-    });
-
-    if (!errors.isEmpty()) {
-      res.render('new_message', {
-        title: 'Post New Message',
-        errors: errors.array()
+    if(!errors.isEmpty()) {
+      Message.find({}, 'title timestamp text user')
+        .populate('user')
+        .exec((err, list_messages) => {
+          res.render('index', {
+          title: 'Members Only',
+          alerts: errors.array(),
+          user: req.user,
+          messages: list_messages.reverse(),
+        });
       });
-      return;
     } else {
+      const message = new Message({
+        title: req.body.message_title,
+        text: req.body.message_text,
+        user: req.user._id,
+      });
+
       message.save(err => {
         if(err) {
           return next(err);
-        };
-        res.redirect('/');
+        } else {
+          res.redirect('/');
+        }
       });
     }
   }
