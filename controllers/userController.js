@@ -21,11 +21,22 @@ exports.index = (req, res, next) => {
 }
 
 exports.log_in_post = (req, res, next) => {
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/',
-    failureFlash: true
-  })(req, res, next) 
+  passport.authenticate('local', (err, user, info) => {
+    if (err) return next(err);
+    if (!user) {
+      res.render('index', {
+        title: 'Members Only',
+        alerts: [{
+          'msg': 'Wrong username and/or password'
+        }]
+      });
+    } else {
+      req.logIn(user, (err) => {
+        if (err) return next(err);
+        res.redirect('/');
+      });
+    }
+  })(req, res, next)
 }
 
 
@@ -58,7 +69,9 @@ exports.elevate_privileges = (req, res) => {
     default:
       res.render('index', {
         title: 'Members Only',
-        alerts: [{ 'msg': 'ACCESS DENIED'}]
+        alerts: [{
+          'msg': 'ACCESS DENIED'
+        }]
       });
   }
   res.redirect('/');
@@ -92,7 +105,7 @@ exports.sign_up_post = [
     min: 1
   }).escape(),
 
-  async(req, res, next) => {
+  async (req, res, next) => {
     let errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -105,7 +118,7 @@ exports.sign_up_post = [
         username: req.body.username.toLowerCase(),
         first_name: req.body.first_name,
         last_name: req.body.last_name,
-        password:  await bcrypt.hash(req.body.password, 10),
+        password: await bcrypt.hash(req.body.password, 10),
       });
 
       user.save((err) => {
@@ -114,7 +127,10 @@ exports.sign_up_post = [
         } else {
           res.render('index', {
             title: 'Members Only',
-            alerts: [{ 'msg': 'Sign Up Successful!', 'type': 'success' }]
+            alerts: [{
+              'msg': 'Sign Up Successful!',
+              'type': 'success'
+            }]
           });
         }
       });
