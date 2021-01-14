@@ -6,6 +6,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv').config();
+const flash = require('connect-flash');
 
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -37,6 +38,7 @@ app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
+app.use(flash());
 
 /*
 * Configure Passport for authetication
@@ -53,7 +55,9 @@ passport.use(
       }
 
       bcrypt.compare(password, user.password, (err, res) => {
-        if(err) return next(err);
+        if(err) {
+          console.log(err);
+        };
         if (res) {
           // passwords match! log user in
           return done(null, user)
@@ -62,8 +66,6 @@ passport.use(
           return done(null, false, {msg: "Incorrect password"})
         }
       })
-
-      return done(null, user);
     });
   })
 );

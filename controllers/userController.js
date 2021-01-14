@@ -20,12 +20,14 @@ exports.index = (req, res, next) => {
     });
 }
 
-exports.log_in_post = (
+exports.log_in_post = (req, res, next) => {
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/',
-  })
-)
+    failureFlash: true
+  })(req, res, next) 
+}
+
 
 exports.log_out_get = (req, res) => {
   req.logout();
