@@ -10,7 +10,6 @@ exports.index = (req, res, next) => {
     .populate('user')
     .exec((err, list_messages) => {
       res.render('index', {
-        title: 'Members Only',
         user: req.user,
         messages: list_messages.reverse(),
       });
@@ -22,7 +21,6 @@ exports.log_in_post = (req, res, next) => {
     if (err) return next(err);
     if (!user) {
       res.render('index', {
-        title: 'Members Only',
         user: req.user,
         alerts: [{
           'msg': 'Wrong username and/or password'
@@ -65,7 +63,6 @@ exports.elevate_privileges = (req, res) => {
       break;
     default:
       res.render('index', {
-        title: 'Members Only',
         user: req.user,
         messages: 'none',
         alerts: [{
@@ -78,7 +75,6 @@ exports.elevate_privileges = (req, res) => {
 
 exports.sign_up_get = (req, res, next) => {
   res.render('sign-up', {
-    title: 'Sign Up',
     user: req.user,
     alerts: '',
   });
@@ -109,7 +105,6 @@ exports.sign_up_post = [
 
     if (!errors.isEmpty()) {
       res.render('index', {
-        title: 'Members Only',
         alerts: errors.array()
       });
     } else {
@@ -125,7 +120,6 @@ exports.sign_up_post = [
           return next(err);
         } else {
           res.render('index', {
-            title: 'Members Only',
             user: req.user,
             alerts: [{
               'msg': 'Sign Up Successful!',
