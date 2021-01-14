@@ -35,7 +35,7 @@
                 <% } %>
               </div>
             <% }) %>
-          <% } else if(user) { %>
+          <% } else if(typeof(user) == 'object' && user) { %>
             <h5>No messages :(</h5>
           <% } %>
         </div>
