@@ -1,5 +1,30 @@
 html,body {
-  height:100%;
+  height: 100%;
+}
+
+footer {
+  position: relative;
+  margin-top: -150px;
+  height: 150px;
+  clear: both;
+  padding: 20px 5px 0px 5px;
+  color: #999;
+  background-color: #f9f9f9;
+  border-top: .05rem solid #e5e5e5;
+  text-align: center;
+}
+
+.message-post {
+  margin-bottom: 4rem;
+}
+
+.message-post-title {
+  margin-bottom: .25rem;
+}
+
+.message-post-meta {
+  margin-bottom: 1rem;
+  color: rgb(153, 153, 153);
 }
 
 #wrap {
@@ -9,14 +34,3 @@ html,body {
 }
 
 
-footer {
-  position: relative;
-  margin-top: -150px; /* negative value of footer height */
-  height: 150px;
-  clear: both;
-  padding-top:20px;
-  color: #999;
-  background-color: #f9f9f9;
-  border-top: .05rem solid #e5e5e5;
-  text-align: center;
-}

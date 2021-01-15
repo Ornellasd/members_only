@@ -28,3 +28,6 @@ benchmarks/graphs
 
 # Environment Variables
 .env
+
+# Old stylesheet
+public/stylesheets/style.css.backup
