@@ -1,4 +1,4 @@
 # Members Only
 Created as part of [The Odin Project Curriculum](https://www.theodinproject.com/courses/nodejs/lessons/members-only).
 
-## Heroku app
+[Heroku app](https://members-only-express-project.herokuapp.com/)
