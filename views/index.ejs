@@ -26,7 +26,7 @@
                   <h2 class="message-post-title"><%= message.title %></h2>
                   <% if(typeof(user) == 'object' && user) { %>
                     <p class="message-post-meta">
-                      <%= user.membership_status == 'Admin' || user.membership_status == 'Member' ? message.timestamp + ' by' : '' %>
+                      <%= user.membership_status == 'Admin' || user.membership_status == 'Member' ? message.formatted_timestamp + ' by' : '' %>
                       <%= user.membership_status == 'Admin' ? message.user.first_name : 'Anonymous' %>
                     </p>
                   <% } %>
@@ -49,10 +49,10 @@
       <p><a href="http://github.com/ornellasd">Check out my GitHub</a> <i class="fa fa-github"></i></p>
       <a href="#">Back to top</a>
     </footer>
-    <%- include('sign-up-modal.ejs') %>
-    <%- include('log-in-modal.ejs') %>
-    <%- include('new-message-modal.ejs') %>
-    <%- include('delete-message-modal.ejs') %>
+    <%- include('partials/sign-up-modal.ejs') %>
+    <%- include('partials/log-in-modal.ejs') %>
+    <%- include('partials/new-message-modal.ejs') %>
+    <%- include('partials/delete-message-modal.ejs') %>
     <script src="/javascripts/script.js"></script>
   </body>
 </html>
